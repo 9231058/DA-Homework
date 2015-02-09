@@ -23,7 +23,7 @@ endif
 ASFLAGS=-Wall -O0 -g
 
 $(P): $(OBJ)
-	$(CC) -o $(P) $(OBG) $(LDLIBS)
+	$(CC) -o $(P) $(OBJ) $(LDLIBS)
 main.o:
 qsort.o: qsort.h
 
