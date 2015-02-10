@@ -5,23 +5,30 @@
  *
  * [] Creation Date : 09-02-2015
  *
- * [] Last Modified : Mon 09 Feb 2015 09:22:49 PM IRST
+ * [] Last Modified : Tue 10 Feb 2015 10:08:46 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
 */
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "qsort.h"
 
 void swap(void *a, void *b, size_t size)
 {
-	void *temp = malloc(size);
+	if (!(a - b))
+		return;
 
-	memmove(temp, a, size);
-	memmove(a, b, size);
-	memmove(b, temp, size);
+	char *temp = NULL;
+	temp = malloc(size);
+
+	printf("%p - %p = %ld\n", a, b, a - b);
+
+	memcpy(temp, a, size);
+	memcpy(a, b, size);
+	memcpy(b, temp, size);
 
 	free(temp);
 }
