@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 09-02-2015
  *
- * [] Last Modified : Tue 10 Feb 2015 10:20:56 PM IRST
+ * [] Last Modified : Tue 10 Feb 2015 10:57:15 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -39,7 +39,9 @@ int main(int argc, char *argv[])
 	arr = malloc(len * sizeof(int));
 	srand(time(NULL));
 	for (i = 0; i < len; i++)
-		arr[i] = rand();
+		arr[i] = rand() % len;
+
+	printf("Address: %p\n", arr);
 
 	clk = clock();
 	t = time(NULL);

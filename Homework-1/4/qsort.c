@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 09-02-2015
  *
- * [] Last Modified : Tue 10 Feb 2015 10:34:33 PM IRST
+ * [] Last Modified : Tue 10 Feb 2015 10:56:44 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -21,15 +21,13 @@ void swap(void *a, void *b, size_t size)
 	if (a == b)
 		return;
 
-	char *temp = NULL;
+	void *tmp = malloc(size);
 
-	temp = malloc(size);
-
-	memcpy(temp, a, size);
+	memcpy(tmp, a, size);
 	memcpy(a, b, size);
-	memcpy(b, temp, size);
+	memcpy(b, tmp, size);
 
-	free(temp);
+	free(tmp);
 }
 
 size_t partition(void *base, size_t size,
@@ -62,7 +60,8 @@ void qsort_r(void *base, size_t size,
 
 	if (high > low) {
 		pivot = partition(base, size, compar, low, high);
-		qsort_r(base, size, compar, low, pivot - 1);
+		if (pivot > 0)
+			qsort_r(base, size, compar, low, pivot - 1);
 		qsort_r(base, size, compar, pivot + 1, high);
 	}
 }
