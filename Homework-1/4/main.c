@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 09-02-2015
  *
- * [] Last Modified : Tue 10 Feb 2015 10:11:26 PM IRST
+ * [] Last Modified : Tue 10 Feb 2015 10:20:56 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -21,8 +21,9 @@ int count = 0;
 int cmp(const void *a, const void *b)
 {
 	count++;
-	const int* a_i = a;
-	const int* b_i = b;
+	const int *a_i = a;
+	const int *b_i = b;
+
 	return *a_i - *b_i;
 }
 
@@ -37,7 +38,7 @@ int main(int argc, char *argv[])
 	scanf("%d", &len);
 	arr = malloc(len * sizeof(int));
 	srand(time(NULL));
-	for ( i = 0; i < len; i++)
+	for (i = 0; i < len; i++)
 		arr[i] = rand();
 
 	clk = clock();
@@ -51,6 +52,6 @@ int main(int argc, char *argv[])
 	printf("Number of compares : %d\n", count);
 	for (i = 0; i < len; i++)
 		printf("arr[%d] = %d\n", i, arr[i]);
-	
+
 	free(arr);
 }

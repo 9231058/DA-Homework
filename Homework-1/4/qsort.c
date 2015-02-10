@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 09-02-2015
  *
- * [] Last Modified : Tue 10 Feb 2015 10:08:46 PM IRST
+ * [] Last Modified : Tue 10 Feb 2015 10:21:18 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -22,9 +22,8 @@ void swap(void *a, void *b, size_t size)
 		return;
 
 	char *temp = NULL;
-	temp = malloc(size);
 
-	printf("%p - %p = %ld\n", a, b, a - b);
+	temp = malloc(size);
 
 	memcpy(temp, a, size);
 	memcpy(a, b, size);
