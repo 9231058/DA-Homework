@@ -9,7 +9,7 @@
 
 P=skyline
 OBJ=main.o common.o
-LIB=
+LIB=gtk+-3.0
 MLIB=
 
 ifdef LIB
@@ -23,7 +23,7 @@ endif
 ASFLAGS=-Wall -O0 -g
 
 $(P): $(OBJ)
-	$(CC) -o $(P) $(OBJ) $(LDFLAGS)
+	$(CC) -o $(P) $(OBJ) $(LDLIBS)
 main.o: building.h common.h
 common.o: common.h
 
