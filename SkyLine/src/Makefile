@@ -7,8 +7,8 @@
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
 
-P=
-OBJ=
+P=skyline
+OBJ=main.o common.o
 LIB=
 MLIB=
 
@@ -23,6 +23,9 @@ endif
 ASFLAGS=-Wall -O0 -g
 
 $(P): $(OBJ)
+	$(CC) -o $(P) $(OBJ) $(LDFLAGS)
+main.o: building.h common.h
+common.o: common.h
 
 .PHONY: clean
 clean:
