@@ -1,6 +1,6 @@
 DA-Homework
 ============
-
+# Introduction
 The main objective of this course is to teach algorithm design and analysis techniques. In this course,
 students will learn how to investigate and analyze a problem and determine possible algorithmic
 methods. Then, they analyze and compare candidate algorithm types with respect to their
