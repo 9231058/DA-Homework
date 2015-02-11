@@ -1,4 +1,4 @@
 TODO List
 ===========
 
-- [] Create better code structure.
+- [ ] Create better code structure.
