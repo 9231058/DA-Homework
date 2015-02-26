@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 12-02-2015
  *
- * [] Last Modified : Thu 26 Feb 2015 12:13:18 PM IRST
+ * [] Last Modified : Thu 26 Feb 2015 05:39:55 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -17,12 +17,16 @@
 #include <gtk/gtk.h>
 
 #include "building.h"
+#include "skyliner.h"
 #include "common.h"
 #include "gui.h"
 
 /* Buildings ... */
 struct building *buildings;
 int number;
+
+struct building *buildings_out;
+int number_out;
 
 int main(int argc, char *argv[])
 {
@@ -43,13 +47,19 @@ int main(int argc, char *argv[])
 	for (i = 0; i < number; i++) {
 		int height, start, end;
 
-		fscanf(file, "%d %d %d", &height, &start, &end);
+		fscanf(file, "%d %d %d", &start, &end, &height);
 
 		buildings[i].height = height;
 		buildings[i].start_point = start;
 		buildings[i].end_point = end;
 	}
 	fclose(file);
+
+	skyliner(buildings, number, &buildings_out, &number_out);
+
+	for (i = 0; i < number_out; i++)
+		printf("%d %d\n", buildings_out[i].start_point,
+				buildings_out[i].height);
 
 	printf("starting GUI ...\n");
 
