@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 26-02-2015
  *
- * [] Last Modified : Thu 26 Feb 2015 12:07:47 PM IRST
+ * [] Last Modified : Fri 27 Feb 2015 12:04:05 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -26,6 +26,7 @@ static cairo_surface_t *surface;
 void clear_surface(void)
 {
 	cairo_t *cr;
+
 	cr = cairo_create(surface);
 	cairo_set_source_rgb(cr, 1, 1, 1);
 	cairo_paint(cr);
@@ -39,7 +40,7 @@ gboolean configure_event_handler(GtkWidget *widget,
 		GdkEventConfigure *event, gpointer data)
 {
 	if (surface)
-	cairo_surface_destroy(surface);
+		cairo_surface_destroy(surface);
 	surface = gdk_window_create_similar_surface(
 	gtk_widget_get_window(widget),
 	CAIRO_CONTENT_COLOR,
@@ -80,10 +81,11 @@ void draw_buildings(GtkWidget *widget)
 	int i;
 	/* Paint to the surface, where we store our state */
 	cr = cairo_create(surface);
-		for (i = 0; i < number; i++) {
+	for (i = 0; i < number; i++) {
 		int start = buildings[i].start_point;
 		int end = buildings[i].end_point;
 		int height = buildings[i].height;
+
 		cairo_move_to(cr, start, 0);
 		cairo_line_to(cr, start, height);
 		cairo_line_to(cr, end, height);
@@ -93,9 +95,9 @@ void draw_buildings(GtkWidget *widget)
 	cairo_fill(cr);
 	cairo_destroy(cr);
 	/* Now invalidate the affected region of the drawing area. */
-	gtk_widget_queue_draw_area (widget, 0, 0,
-	gtk_widget_get_allocated_width(widget),
-	gtk_widget_get_allocated_height(widget));
+	gtk_widget_queue_draw_area(widget, 0, 0,
+			gtk_widget_get_allocated_width(widget),
+			gtk_widget_get_allocated_height(widget));
 }
 
 /*
@@ -110,11 +112,10 @@ gboolean button_press_event_handler(GtkWidget *widget,
 	/* paranoia check, in case we haven't gotten a configure event */
 	if (surface == NULL)
 		return FALSE;
-	if (event->button == GDK_BUTTON_PRIMARY) {
+	if (event->button == GDK_BUTTON_PRIMARY)
 		draw_buildings(widget);
-	} else if (event->button == GDK_BUTTON_SECONDARY) {
+	else if (event->button == GDK_BUTTON_SECONDARY)
 		;
-	}
 	/* We've handled the event, stop processing */
 	return TRUE;
 }

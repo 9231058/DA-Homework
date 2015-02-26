@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 26-02-2015
  *
- * [] Last Modified : Thu 26 Feb 2015 05:58:06 PM IRST
+ * [] Last Modified : Fri 27 Feb 2015 12:07:30 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -39,52 +39,57 @@ static void skyliner_r(const struct building *buildings,
 		skyliner_r(buildings, m + 1, j, &right_buildings, &right_size);
 
 
-		*out_buildings = malloc((left_size + right_size) * sizeof(struct building));
+		*out_buildings = malloc((left_size + right_size)
+				* sizeof(struct building));
 		*out_size = 0;
 
 		int index_left = 0;
-		int index_right = 0;	
+		int index_right = 0;
 		int curH1 = 0, curH2 = 0, curX = 0;
 
 		while (index_left < left_size && index_right < right_size) {
-			if (left_buildings[index_left].start_point <
-					right_buildings[index_right].start_point) {
-				
+			if (left_buildings[index_left]
+					.start_point
+					< right_buildings[index_right]
+					.start_point) {
+
 				curX = left_buildings[index_left].start_point;
 				curH1 = left_buildings[index_left].height;
-				
+
 				index_left++;
-				
+
 				if (curH1 > curH2) {
-					(*out_buildings + *out_size)->start_point
-						= curX;
-					(*out_buildings + *out_size)->height
-						= curH1;
+					(*out_buildings + *out_size)
+						->start_point = curX;
+					(*out_buildings + *out_size)
+						->height = curH1;
 					(*out_size)++;
 				}
-			} else if (left_buildings[index_left].start_point >
-					right_buildings[index_right].start_point) {
+			} else if (left_buildings[index_left]
+					.start_point >
+					right_buildings[index_right]
+					.start_point) {
 
 				curX = right_buildings[index_right].start_point;
 				curH2 = right_buildings[index_right].height;
 
 				index_right++;
-				
+
 				if (curH2 > curH1) {
-					(*out_buildings + *out_size)->start_point
-						= curX;
-					(*out_buildings + *out_size)->height
-						= curH2;
+					(*out_buildings + *out_size)
+						->start_point = curX;
+					(*out_buildings + *out_size)
+						->height = curH2;
 					(*out_size)++;
 				}
 			} else {
 				curX = right_buildings[index_right].start_point;
 				curH1 = left_buildings[index_left].height;
 				curH2 = right_buildings[index_right].height;
-	
+
 				index_right++;
 				index_left++;
-				
+
 				(*out_buildings + *out_size)->start_point
 					= curX;
 				(*out_buildings + *out_size)->height
@@ -96,20 +101,28 @@ static void skyliner_r(const struct building *buildings,
 		}
 		if (index_right == right_size) {
 			while (index_left < left_size) {
-					(*out_buildings + *out_size)->start_point
-						= left_buildings[index_left].start_point;
-					(*out_buildings + *out_size)->height
-						= left_buildings[index_left].height;
+					(*out_buildings + *out_size)
+						->start_point =
+						left_buildings[index_left]
+						.start_point;
+					(*out_buildings + *out_size)
+						->height =
+						left_buildings[index_left]
+						.height;
 
 					index_left++;
 					(*out_size)++;
 			}
 		} else if (index_left == left_size) {
 			while (index_right < right_size) {
-					(*out_buildings + *out_size)->start_point
-						= right_buildings[index_right].start_point;
-					(*out_buildings + *out_size)->height
-						= right_buildings[index_right].height;
+					(*out_buildings + *out_size)
+						->start_point
+						= right_buildings[index_right]
+						.start_point;
+					(*out_buildings + *out_size)
+						->height
+						= right_buildings[index_right]
+						.height;
 
 					index_right++;
 					(*out_size)++;
