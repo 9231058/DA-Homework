@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 12-02-2015
  *
- * [] Last Modified : Thu 26 Feb 2015 05:39:55 PM IRST
+ * [] Last Modified : Fri 27 Feb 2015 03:02:42 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 	gtk_init(&argc, &argv);
 
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_title(GTK_WINDOW(window), "Drawing Area");
+	gtk_window_set_title(GTK_WINDOW(window), "Skyline");
 
 	g_signal_connect(window, "destroy", G_CALLBACK(close_window), NULL);
 

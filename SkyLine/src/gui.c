@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 26-02-2015
  *
- * [] Last Modified : Fri 27 Feb 2015 12:04:05 AM IRST
+ * [] Last Modified : Fri 27 Feb 2015 02:58:35 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -81,6 +81,8 @@ void draw_buildings(GtkWidget *widget)
 	int i;
 	/* Paint to the surface, where we store our state */
 	cr = cairo_create(surface);
+	cairo_set_source_rgb(cr, (253.0 / 255), (142.0 / 255), (47.0 / 255));
+	cairo_set_line_width(cr, 0.5);
 	for (i = 0; i < number; i++) {
 		int start = buildings[i].start_point;
 		int end = buildings[i].end_point;
@@ -91,8 +93,7 @@ void draw_buildings(GtkWidget *widget)
 		cairo_line_to(cr, end, height);
 		cairo_line_to(cr, end, 0);
 	}
-
-	cairo_fill(cr);
+	cairo_stroke(cr);
 	cairo_destroy(cr);
 	/* Now invalidate the affected region of the drawing area. */
 	gtk_widget_queue_draw_area(widget, 0, 0,
