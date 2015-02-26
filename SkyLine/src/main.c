@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 12-02-2015
  *
- * [] Last Modified : Thu 26 Feb 2015 12:07:54 PM IRST
+ * [] Last Modified : Thu 26 Feb 2015 12:13:18 PM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -66,9 +66,9 @@ int main(int argc, char *argv[])
 
 	gtk_container_set_border_width(GTK_CONTAINER(window), 8);
 
-	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-	gtk_container_add (GTK_CONTAINER (window), frame);
+	frame = gtk_frame_new(NULL);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+	gtk_container_add(GTK_CONTAINER(window), frame);
 
 	board = gtk_drawing_area_new();
 	/* set a minimum size */
@@ -77,22 +77,26 @@ int main(int argc, char *argv[])
 	gtk_container_add(GTK_CONTAINER(frame), board);
 
 	/* Signals used to handle the backing surface */
-	g_signal_connect(board, "draw", G_CALLBACK(draw_handler), NULL);
-	g_signal_connect(board,"configure-event", G_CALLBACK(configure_event_handler), NULL);
+	g_signal_connect(board, "draw",
+			G_CALLBACK(draw_handler), NULL);
+	g_signal_connect(board, "configure-event",
+			G_CALLBACK(configure_event_handler), NULL);
 
 	/* Event signals */
-	g_signal_connect(board, "button-press-event", G_CALLBACK(button_press_event_handler), NULL);
+	g_signal_connect(board, "button-press-event",
+			G_CALLBACK(button_press_event_handler), NULL);
 
 	/*
 	 * Ask to receive events the drawing area doesn't normally
 	 * subscribe to. In particular, we need to ask for the
 	 * button press and motion notify events that want to handle.
 	*/
-	gtk_widget_set_events(board, gtk_widget_get_events(board) | GDK_BUTTON_PRESS_MASK);
+	gtk_widget_set_events(board,
+			gtk_widget_get_events(board) | GDK_BUTTON_PRESS_MASK);
 
-	gtk_widget_show_all (window);
+	gtk_widget_show_all(window);
 
-	gtk_main ();
+	gtk_main();
 
 	return 0;
 }
