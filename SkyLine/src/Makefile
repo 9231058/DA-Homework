@@ -8,7 +8,7 @@
 # =======================================
 
 P=skyline
-OBJ=main.o common.o
+OBJ=main.o common.o gui.o
 LIB=gtk+-3.0
 MLIB=
 
@@ -24,7 +24,8 @@ ASFLAGS=-Wall -O0 -g
 
 $(P): $(OBJ)
 	$(CC) -o $(P) $(OBJ) $(LDLIBS)
-main.o: building.h common.h
+main.o: building.h common.h gui.h
+gui.o: gui.h
 common.o: common.h
 
 .PHONY: clean
