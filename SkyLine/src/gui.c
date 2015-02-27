@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 26-02-2015
  *
- * [] Last Modified : Fri 27 Feb 2015 08:10:24 AM IRST
+ * [] Last Modified : Fri 27 Feb 2015 08:21:38 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -88,7 +88,7 @@ void draw_buildings(GtkWidget *widget)
 
 	/* Paint to the surface */
 	cr = cairo_create(surface);
-	cairo_set_source_rgb(cr, (255.0 / 255), (142.0 / 255), (47.0 / 255));
+	cairo_set_source_rgb(cr, (247.0 / 255), (115.0 / 255), (2.0 / 255));
 	cairo_set_line_width(cr, 0.5);
 	for (i = 0; i < number; i++) {
 		int start = buildings[i].start_point;
@@ -119,7 +119,7 @@ void draw_skyline(GtkWidget *widget)
 
 	/* Paint to the surface */
 	cr = cairo_create(surface);
-	cairo_set_source_rgb(cr, (255.0 / 255), (142.0 / 255), (47.0 / 255));
+	cairo_set_source_rgb(cr, (247.0 / 255), (115.0 / 255), (2.0 / 255));
 	cairo_set_line_width(cr, 0.5);
 	for (i = 0; i < number_out; i++) {
 		curX = buildings_out[i].start_point;
