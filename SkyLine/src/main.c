@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 12-02-2015
  *
- * [] Last Modified : Fri 27 Feb 2015 03:02:42 AM IRST
+ * [] Last Modified : Fri 27 Feb 2015 08:12:51 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	int i = 0;
 	FILE *file = NULL;
 
-	printf("Please enter filename:\n");
+	printf("Please enter input filename:\n");
 	fgets(filename, 1024, stdin);
 	filename[strlen(filename) - 1] = '\0';
 
@@ -55,11 +55,21 @@ int main(int argc, char *argv[])
 	}
 	fclose(file);
 
+	printf("Please enter output filename:\n");
+	fgets(filename, 1024, stdin);
+	filename[strlen(filename) - 1] = '\0';
+
+	file = fopen(filename, "w");
+	if (!file)
+		sdie("fopen()");
+
 	skyliner(buildings, number, &buildings_out, &number_out);
 
+	fprintf(file, "%d\n", number_out);
 	for (i = 0; i < number_out; i++)
-		printf("%d %d\n", buildings_out[i].start_point,
+		fprintf(file, "%d %d\n", buildings_out[i].start_point,
 				buildings_out[i].height);
+	fclose(file);
 
 	printf("starting GUI ...\n");
 
