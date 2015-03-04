@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 12-02-2015
  *
- * [] Last Modified : Fri 27 Feb 2015 08:12:51 AM IRST
+ * [] Last Modified : Wed 04 Mar 2015 06:35:05 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -30,48 +30,6 @@ int number_out;
 
 int main(int argc, char *argv[])
 {
-	char filename[1024];
-	int i = 0;
-	FILE *file = NULL;
-
-	printf("Please enter input filename:\n");
-	fgets(filename, 1024, stdin);
-	filename[strlen(filename) - 1] = '\0';
-
-	file = fopen(filename, "r");
-	if (!file)
-		sdie("fopen()");
-
-	fscanf(file, "%d", &number);
-	buildings = malloc(sizeof(struct building) * number);
-	for (i = 0; i < number; i++) {
-		int height, start, end;
-
-		fscanf(file, "%d %d %d", &start, &end, &height);
-
-		buildings[i].height = height;
-		buildings[i].start_point = start;
-		buildings[i].end_point = end;
-	}
-	fclose(file);
-
-	printf("Please enter output filename:\n");
-	fgets(filename, 1024, stdin);
-	filename[strlen(filename) - 1] = '\0';
-
-	file = fopen(filename, "w");
-	if (!file)
-		sdie("fopen()");
-
-	skyliner(buildings, number, &buildings_out, &number_out);
-
-	fprintf(file, "%d\n", number_out);
-	for (i = 0; i < number_out; i++)
-		fprintf(file, "%d %d\n", buildings_out[i].start_point,
-				buildings_out[i].height);
-	fclose(file);
-
-	printf("starting GUI ...\n");
 
 	GtkWidget *window;
 	GtkWidget *frame;
@@ -114,8 +72,88 @@ int main(int argc, char *argv[])
 	gtk_widget_set_events(board,
 			gtk_widget_get_events(board) | GDK_BUTTON_PRESS_MASK);
 
-	gtk_widget_show_all(window);
+	GtkWidget *file_open;
+	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
+	int res;
 
+	file_open = gtk_file_chooser_dialog_new("Input File", NULL,
+			action, "Cancel", GTK_RESPONSE_CANCEL,
+			"Open", GTK_RESPONSE_ACCEPT, NULL);
+	res = gtk_dialog_run(GTK_DIALOG(file_open));
+	if (res == GTK_RESPONSE_ACCEPT) {
+		char *filename;
+
+		GtkFileChooser *chooser = GTK_FILE_CHOOSER(file_open);
+		filename = gtk_file_chooser_get_filename(chooser);
+		
+		int i = 0;
+		FILE *file = NULL;
+
+
+		file = fopen(filename, "r");
+		if (!file)
+			sdie("fopen()");
+
+		fscanf(file, "%d", &number);
+		buildings = malloc(sizeof(struct building) * number);
+		for (i = 0; i < number; i++) {
+			int height, start, end;
+
+			fscanf(file, "%d %d %d", &start, &end, &height);
+			buildings[i].height = height;
+			buildings[i].start_point = start;
+			buildings[i].end_point = end;
+		}
+		fclose(file);	
+
+		g_free(filename);
+	} else {
+		udie("Plese enter input filename");
+	}
+
+	gtk_widget_destroy(file_open);
+	
+	GtkWidget *file_save;
+	GtkFileChooser *chooser;
+	action = GTK_FILE_CHOOSER_ACTION_SAVE;
+
+	file_save = gtk_file_chooser_dialog_new("Output File", NULL,
+			action, "Cancel", GTK_RESPONSE_CANCEL,
+			"Save", GTK_RESPONSE_ACCEPT, NULL);
+	chooser = GTK_FILE_CHOOSER(file_save);
+
+	gtk_file_chooser_set_do_overwrite_confirmation(chooser, TRUE);
+
+	res = gtk_dialog_run(GTK_DIALOG(file_save));
+	if (res == GTK_RESPONSE_ACCEPT) {
+		char *filename;
+
+		filename = gtk_file_chooser_get_filename(chooser);
+
+		int i = 0;
+		FILE *file = NULL;
+
+		file = fopen(filename, "w");
+		if (!file)
+			sdie("fopen()");
+
+		skyliner(buildings, number, &buildings_out, &number_out);
+
+		fprintf(file, "%d\n", number_out);
+		for (i = 0; i < number_out; i++)
+			fprintf(file, "%d %d\n", buildings_out[i].start_point,
+					buildings_out[i].height);
+		fclose(file);
+		
+		g_free (filename);
+	} else {
+		udie("Please enter output filename");
+	}
+
+	gtk_widget_destroy(file_save);
+
+	gtk_widget_show_all(window);
+	
 	gtk_main();
 
 	return 0;
