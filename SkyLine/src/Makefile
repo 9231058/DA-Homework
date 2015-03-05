@@ -10,7 +10,7 @@
 P=skyline
 OBJ=main.o common.o gui.o skyliner.o
 LIB=gtk+-3.0
-MLIB=
+MLIB=-lm
 
 ifdef LIB
 CFLAGS=-Wall -O0 -g -std=gnu11 \

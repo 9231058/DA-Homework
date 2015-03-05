@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 26-02-2015
  *
- * [] Last Modified : Fri 27 Feb 2015 08:21:38 AM IRST
+ * [] Last Modified : Thu 05 Mar 2015 11:48:18 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -91,9 +91,9 @@ void draw_buildings(GtkWidget *widget)
 	cairo_set_source_rgb(cr, (247.0 / 255), (115.0 / 255), (2.0 / 255));
 	cairo_set_line_width(cr, 0.5);
 	for (i = 0; i < number; i++) {
-		int start = buildings[i].start_point;
-		int end = buildings[i].end_point;
-		int height = buildings[i].height;
+		int start = buildings[i].start_point * 10;
+		int end = buildings[i].end_point * 10;
+		double height = buildings[i].height * 10;
 
 		cairo_move_to(cr, start, 0);
 		cairo_line_to(cr, start, height);
@@ -113,7 +113,8 @@ void draw_skyline(GtkWidget *widget)
 {
 	cairo_t *cr;
 	int i;
-	int curH = 0, curX = 0;
+	double curH = 0;
+	int curX = 0;
 
 	clear_surface();
 
@@ -122,8 +123,8 @@ void draw_skyline(GtkWidget *widget)
 	cairo_set_source_rgb(cr, (247.0 / 255), (115.0 / 255), (2.0 / 255));
 	cairo_set_line_width(cr, 0.5);
 	for (i = 0; i < number_out; i++) {
-		curX = buildings_out[i].start_point;
-		int height = buildings_out[i].height;
+		curX = buildings_out[i].start_point * 10;
+		double height = buildings_out[i].height * 10;
 
 		cairo_line_to(cr, curX, curH);
 		cairo_line_to(cr, curX, height);
