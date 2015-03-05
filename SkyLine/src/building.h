@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 11-02-2015
  *
- * [] Last Modified : Wed 11 Feb 2015 10:32:00 PM IRST
+ * [] Last Modified : Thu 05 Mar 2015 11:02:56 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -14,7 +14,7 @@
 #define BUILDING_H
 
 struct building {
-	int height;
+	double height;
 	int start_point;
 	int end_point;
 };

@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 12-02-2015
  *
- * [] Last Modified : Wed 04 Mar 2015 06:35:05 AM IRST
+ * [] Last Modified : Thu 05 Mar 2015 11:05:13 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -97,9 +97,10 @@ int main(int argc, char *argv[])
 		fscanf(file, "%d", &number);
 		buildings = malloc(sizeof(struct building) * number);
 		for (i = 0; i < number; i++) {
-			int height, start, end;
+			int start, end;
+			double height;
 
-			fscanf(file, "%d %d %d", &start, &end, &height);
+			fscanf(file, "%d %d %lg", &start, &end, &height);
 			buildings[i].height = height;
 			buildings[i].start_point = start;
 			buildings[i].end_point = end;
@@ -141,7 +142,7 @@ int main(int argc, char *argv[])
 
 		fprintf(file, "%d\n", number_out);
 		for (i = 0; i < number_out; i++)
-			fprintf(file, "%d %d\n", buildings_out[i].start_point,
+			fprintf(file, "%d %lg\n", buildings_out[i].start_point,
 					buildings_out[i].height);
 		fclose(file);
 		
