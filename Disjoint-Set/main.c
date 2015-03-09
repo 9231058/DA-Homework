@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 10-03-2015
  *
- * [] Last Modified : Tue 10 Mar 2015 12:57:18 AM IRST
+ * [] Last Modified : Tue 10 Mar 2015 01:28:41 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -22,4 +22,7 @@ int main(int argc, char *argv[])
 	diset_merge(d, 1, 4);
 	printf("%d\n", diset_find(d, 4));
 	printf("%d\n", diset_find(d, 1));
+	printf("%d\n", diset_members(d, 4));
+
+	diset_delete(d);
 }

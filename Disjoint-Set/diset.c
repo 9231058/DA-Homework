@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 10-03-2015
  *
- * [] Last Modified : Tue 10 Mar 2015 12:57:28 AM IRST
+ * [] Last Modified : Tue 10 Mar 2015 01:27:02 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -29,6 +29,7 @@ struct diset *diset_new(int number)
 	return new;
 
 }
+
 int diset_find(struct diset *d, int i)
 {
 	if (d->U[i] < 0)
@@ -47,6 +48,12 @@ int diset_merge(struct diset *d, int i, int j)
 	}
 	return 0;
 
+}
+
+int diset_members(struct diset *d, int i)
+{
+	i = diset_find(d, i);
+	return -d->U[i];
 }
 
 void diset_delete(struct diset *d)
