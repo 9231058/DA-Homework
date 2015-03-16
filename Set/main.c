@@ -18,12 +18,12 @@
 int main(int argc, char *argv[])
 {
 	struct set *S = set_new();
-	
+
 	set_add(S, 1);
 	set_add(S, 2);
 	set_add(S, 3);
 	set_add(S, 4);
-	
+
 	set_fprint(S, stdout);
 	printf("\n");
 

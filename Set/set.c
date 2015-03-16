@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 16-03-2015
  *
- * [] Last Modified : Mon 16 Mar 2015 01:46:05 AM IRST
+ * [] Last Modified : Mon 16 Mar 2015 03:37:28 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -50,7 +50,7 @@ int set_get(const struct set *S, int number)
 void set_fprint(const struct set *S, FILE *stream)
 {
 	int i = 0;
-	
+
 	fprintf(stream, "[ ");
 	for (i = 0; i < sizeof(int) * 8; i++) {
 		if (set_get(S, i))
@@ -83,7 +83,7 @@ static int C(int n, int k)
 		}
 	}
 	int answer = B[n][k];
-	
+
 	for (i = 0; i <= n; i++)
 		free(B[i]);
 	free(B);
@@ -112,7 +112,8 @@ static void set_subset_r(const struct set *S, int k, struct set *t,
 		for (i = s; i < sizeof(int) * 8; i++) {
 			if (set_get(S, i)) {
 				set_add(t, i);
-				set_subset_r(S, k, t, index + 1, i + 1, subsets, sub_index);
+				set_subset_r(S, k, t, index + 1,
+						i + 1, subsets, sub_index);
 				set_remove(t, i);
 			}
 		}
@@ -125,7 +126,7 @@ void set_subset(const struct set *S, int k,
 	int i = 0;
 	int zero = 0;
 	struct set *t;
-	
+
 	*numbers = C(S->size, k);
 	*subsets = malloc(*numbers * sizeof(struct set *));
 	for (i = 0; i < *numbers; i++)
