@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 16-03-2015
  *
- * [] Last Modified : Mon 16 Mar 2015 03:35:54 AM IRST
+ * [] Last Modified : Mon 16 Mar 2015 10:28:34 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -17,7 +17,10 @@
 #include "set.h"
 #include "tsp.h"
 
-void travel(int n, int **const W, int **P, int *minlength)
+static int **P;
+static int size;
+
+void travel(int n, int **const W, int *minlength)
 {
 	int i, j, k, l;
 	int **D;
@@ -26,6 +29,17 @@ void travel(int n, int **const W, int **P, int *minlength)
 	V = set_new();
 	for (i = 1; i < n; i++)
 		set_add(V, i);
+
+	if (P) {
+		for (i = 0; i < size; i++)
+			free(P[i]);
+		free(P);
+	}
+	size = n;
+
+	P = malloc(n * sizeof(int *));
+	for (i = 0; i < n; i++)
+		P[i] = malloc((1 << n) * sizeof(int));
 
 	D = malloc(n * sizeof(int *));
 	for (i = 0; i < n; i++)
@@ -43,6 +57,7 @@ void travel(int n, int **const W, int **P, int *minlength)
 			for (i = 1; i < n; i++) {
 				if (!set_get(A[l], i)) {
 					int min = INT_MAX;
+					int min_index;
 
 					for (j = 0; j < n; j++) {
 						if (set_get(A[l], j)) {
@@ -51,15 +66,16 @@ void travel(int n, int **const W, int **P, int *minlength)
 							t = set_new();
 							*t = *(A[l]);
 							set_remove(t, j);
-							if (D[j][t->set_t] + W[i][j] > 0 && min > D[j][t->set_t] + W[i][j]) {
+							if (D[j][t->set_t] + W[i][j] > 0
+									&& min > D[j][t->set_t] + W[i][j]) {
 								min = D[j][t->set_t] + W[i][j];
-								printf("%d %d : %d\n", j, t->set_t, D[j][t->set_t]);
+								min_index = j;
 							}
 							set_free(t);
 						}
 					}
 					D[i][A[l]->set_t] = min;
-					printf("%d\n", min);
+					P[i][A[l]->set_t] = min_index;
 				}
 			}
 		}
@@ -69,6 +85,7 @@ void travel(int n, int **const W, int **P, int *minlength)
 	}
 
 	int min = INT_MAX;
+	int min_index;
 
 	for (i = 1; i < n; i++) {
 		struct set *t;
@@ -77,16 +94,44 @@ void travel(int n, int **const W, int **P, int *minlength)
 		*t = *V;
 		set_remove(t, i);
 		if (D[i][t->set_t] + W[0][i] >= 0
-				&& min > D[i][t->set_t] + W[0][i])
+				&& min > D[i][t->set_t] + W[0][i]) {
 			min = D[i][t->set_t] + W[0][i];
+			min_index = i;
+		}
 		set_free(t);
 	}
 
+	D[0][V->set_t] = min;
+	P[0][V->set_t] = min_index;
 	*minlength = min;
 
 	for (i = 0; i < n; i++)
 		free(D[i]);
 	free(D);
+
+	set_free(V);
+}
+
+void travel_fprint(FILE *stream)
+{
+	if (!P || !size)
+		return;
+	int i;
+	int start = 0, old_start = 0;
+	struct set *V;
+
+	V = set_new();
+	for (i = 1; i < size; i++)
+		set_add(V, i);
+
+	fprintf(stream, "1 -> ");
+	while (V->set_t) {
+		fprintf(stream, "%d -> ", P[start][V->set_t] + 1);
+		old_start = start;
+		start = P[start][V->set_t];
+		set_remove(V, P[old_start][V->set_t]);
+	}
+	fprintf(stream, " 1\n");
 
 	set_free(V);
 }

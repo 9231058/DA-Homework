@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 16-03-2015
  *
- * [] Last Modified : Mon 16 Mar 2015 03:17:02 AM IRST
+ * [] Last Modified : Mon 16 Mar 2015 10:19:04 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -50,7 +50,8 @@ int main(int argc, char *argv[])
 
 	int minlength;
 
-	travel(n, W, NULL, &minlength);
+	travel(n, W, &minlength);
+	travel_fprint(stdout);
 
 	printf("%d\n", minlength);
 
