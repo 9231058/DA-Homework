@@ -5,7 +5,7 @@
  *
  * [] Creation Date : 16-03-2015
  *
- * [] Last Modified : Mon 16 Mar 2015 01:46:05 AM IRST
+ * [] Last Modified : Mon 16 Mar 2015 03:37:28 AM IRST
  *
  * [] Created By : Parham Alvani (parham.alvani@gmail.com)
  * =======================================
@@ -112,7 +112,8 @@ static void set_subset_r(const struct set *S, int k, struct set *t,
 		for (i = s; i < sizeof(int) * 8; i++) {
 			if (set_get(S, i)) {
 				set_add(t, i);
-				set_subset_r(S, k, t, index + 1, i + 1, subsets, sub_index);
+				set_subset_r(S, k, t, index + 1,
+						i + 1, subsets, sub_index);
 				set_remove(t, i);
 			}
 		}
