@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	int i;
 	int n, W;
 	struct object *obj;
-	
+
 	scanf("%d", &n);
 	obj = malloc(n * sizeof(struct object));
 	for (i = 0; i < n; i++) {
