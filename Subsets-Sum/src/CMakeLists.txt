@@ -6,4 +6,4 @@
 #
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
-add_executable (N-Queen.out main.c n-queen.c ../../Subsets-Sum/src/subsets-sum.h ../../Subsets-Sum/src/subsets-sum.c)
+add_executable (Subsets-Sum.out subsets-sum.c main.c)
