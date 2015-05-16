@@ -6,8 +6,4 @@
 #
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
-cmake_minimum_required (VERSION 2.6)
-
-add_subdirectory (Subsets-Sum)
-add_subdirectory (N-Queen)
-add_subdirectory (Homework-1/4)
+add_executable (Homework-4-1.out main.c qsort.c)

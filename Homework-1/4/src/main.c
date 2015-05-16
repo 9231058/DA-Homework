@@ -14,8 +14,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "qsort.h"
-
 int count = 0;
 
 int cmp(const void *a, const void *b)
@@ -37,7 +35,7 @@ int main(int argc, char *argv[])
 
 	scanf("%d", &len);
 	arr = malloc(len * sizeof(int));
-	srand(time(NULL));
+	srand((unsigned int) time(NULL));
 	for (i = 0; i < len; i++)
 		arr[i] = rand() % len;
 

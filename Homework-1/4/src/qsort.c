@@ -11,7 +11,6 @@
  * =======================================
 */
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 
 #include "qsort.h"
@@ -31,8 +30,8 @@ void swap(void *a, void *b, size_t size)
 }
 
 size_t partition(void *base, size_t size,
-		int (*compar)(const void *, const void *),
-		size_t low, size_t high)
+	int (*compare)(const void *, const void *),
+	size_t low, size_t high)
 {
 	size_t i, j;
 	void *item;
@@ -40,21 +39,21 @@ size_t partition(void *base, size_t size,
 	item = base + low * size;
 	j = low;
 	for (i = low + 1; i <= high; i++) {
-		if (compar(base + i * size, item) < 0) {
+		if (compare(base + i * size, item) < 0) {
 			j++;
 			swap(base + i * size,
-					base + j * size, size);
+				base + j * size, size);
 		}
 	}
 	swap(base + low * size,
-			base + j * size, size);
+		base + j * size, size);
 	return j;
 
 }
 
 void qsort_r(void *base, size_t size,
-		int (*compar)(const void *, const void *),
-		size_t low, size_t high)
+	int (*compar)(const void *, const void *),
+	size_t low, size_t high)
 {
 	size_t pivot;
 
@@ -67,8 +66,8 @@ void qsort_r(void *base, size_t size,
 }
 
 void qsort(void *base, size_t nmemb, size_t size,
-		int (*compar)(const void *, const void *))
+	int (*compare)(const void *, const void *))
 {
-	qsort_r(base, size, compar, 0, nmemb - 1);
+	qsort_r(base, size, compare, 0, nmemb - 1);
 }
 
