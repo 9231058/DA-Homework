@@ -41,7 +41,7 @@ int lcs(const char *A, const char *B)
 				D[i][j] = 0;
 			else
 				D[i][j] = (i > 0 && j > 0)
-					? D[i - 1][j - 1] + 1 : 1;
+				          ? D[i - 1][j - 1] + 1 : 1;
 			if (D[i][j] > max) {
 				max = D[i][j];
 				max_i = i;
@@ -51,17 +51,17 @@ int lcs(const char *A, const char *B)
 	}
 
 	P = malloc(((n > m) ? m : n)
-			* sizeof(char));
+	           * sizeof(char));
 	i = 0;
 	while (max_i >= 0 && max_j >= 0 &&
-			D[max_i][max_j] != 0) {
+	       D[max_i][max_j] != 0) {
 		P[i] = A[max_i];
 		max_i--;
 		max_j--;
 		i++;
 	}
 	P[i] = 0;
-	
+
 	for (i = 0; i < n; i++)
 		free(D[i]);
 	free(D);

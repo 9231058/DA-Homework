@@ -6,9 +6,4 @@
 #
 # [] Created By : Parham Alvani (parham.alvani@gmail.com)
 # =======================================
-cmake_minimum_required (VERSION 2.6)
-
-add_subdirectory (Subsets-Sum)
-add_subdirectory (N-Queen)
-add_subdirectory (Homework-1/4)
-add_subdirectory (Long-Common-Substring)
+add_executable (Long-Common-Substring.out main.c lcs.c)
